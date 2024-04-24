@@ -9,11 +9,12 @@
     <h1>Пошук репозиторіїв на GitHub</h1>
     <input type="text" id="searchInput" placeholder="Введіть текст для пошуку">
     <button onclick="searchRepositories()">Пошук</button>
-    <ul id="repositoriesList"></ul>
-
+    <ul id="repositoriesList"></ul> 
+ 
     <script>
         function searchRepositories() {
             const query = document.getElementById("searchInput").value;
+            // GitHub API
             const url = `https://api.github.com/search/repositories?q=${query}`;
             
             fetch(url)
@@ -34,7 +35,7 @@
         }
 
         function showRepositoryDetails(repo) {
-            alert(`Назва: ${repo.full_name}\nОпис: ${repo.description}\nURL: ${repo.html_url}`);
+            alert(`Назва: ${repo.full_name}\n Опис: ${repo.description}\n URL: ${repo.html_url}`);
         }
     </script>
 </body>
