@@ -18,25 +18,26 @@
             const url = `https://api.github.com/search/repositories?q=${query}`;
             
             fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    const repositories = data.items;
-                    const repositoriesList = document.getElementById("repositoriesList");
-                    repositoriesList.innerHTML = "";
-                    
-                    repositories.forEach((repo, index) => {
-                        const listItem = document.createElement("li");
-                        listItem.innerHTML = `<strong>${index + 1}.</strong> ${repo.full_name}`;
-                        listItem.addEventListener("click", () => showRepositoryDetails(repo));
-                        repositoriesList.appendChild(listItem);
-                    });
-                })
-                .catch(error => console.error("Failed to fetch repositories", error));
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch repositories');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // код для обробки отриманих даних
+    })
+    .catch(error => console.error("Failed to fetch repositories", error));
+
         }
 
         function showRepositoryDetails(repo) {
             alert(`Назва: ${repo.full_name}\n Опис: ${repo.description}\n URL: ${repo.html_url}`);
         }
+        const query = document.getElementById("searchInput").value.trim(); // видалення зайвих пробілів з початку та кінця рядка
+const repositoriesList = document.getElementById("repositoriesList");
+repositoriesList.innerHTML = ""; // очищення списку перед виводом нових результатів
+
     </script>
 </body>
 </html>
